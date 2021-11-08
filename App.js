@@ -13,13 +13,16 @@ import {
   Text,
   FlatList
 } from 'react-native';
+import {Provider } from 'react-redux';
 import { uuid } from 'uuidv4';
 import Lists from './components/features/Lists';
+import HomeView from './components/home/HomeView';
 import Header from './components/shareable/header';
+import { store } from './store';
+
 
 
 const App = () => {
-
   const [items , setItems] = useState([
     {id:1 , text:'Milk'},
     {id:2 , text:'Bread'},
@@ -27,18 +30,22 @@ const App = () => {
     {id:4 , text:'Egg'}
   ]);
 
+
   return (
-    <SafeAreaView >
-      <Header title="Shopping List"/>
-      <FlatList
-        data={items}
-        renderItem={({item})=>(
-          <Lists 
-            item={item}
-          />
-        )}
-      />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView >
+        {/* <Header title="Shopping List"/> */}
+        <HomeView/>
+        {/* <FlatList
+          data={items}
+          renderItem={({item})=>(
+            <Lists 
+              item={item}
+            />
+          )}
+        /> */}
+      </SafeAreaView>
+    </Provider>
   );
 };
 
